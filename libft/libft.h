@@ -6,7 +6,7 @@
 /*   By: hyunjcho <hyunjcho@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 13:10:45 by hyunjcho          #+#    #+#             */
-/*   Updated: 2022/07/27 19:31:03 by hyunjcho         ###   ########.fr       */
+/*   Updated: 2022/07/29 17:17:17 by hyunjcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ char	**ft_split(char const *s, char c);
 size_t	ft_strlcpy(char	*dst, const char *src, size_t dstsize);
 int		ft_strcmp(const char *s1, const char *s2);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
+char	*ft_strchr(const char *s, int c);
 void	*ft_memset(void	*s, int c, size_t len);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putstr_fd(char *s, int fd);

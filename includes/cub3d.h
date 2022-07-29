@@ -4,6 +4,8 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include "struct.h"
+# include "init.h"
+# include "map.h"
 # include "utils.h"
 # include "../libft/libft.h"
 

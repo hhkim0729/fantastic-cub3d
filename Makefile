@@ -6,7 +6,7 @@
 #    By: hyunjcho <hyunjcho@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/20 15:39:52 by hyunjcho          #+#    #+#              #
-#    Updated: 2022/07/27 19:25:15 by hyunjcho         ###   ########.fr        #
+#    Updated: 2022/07/29 17:46:08 by hyunjcho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,13 +27,17 @@ RM = rm -rf
 
 INCLUDE_DIR = ./includes/
 
-FLAG = -Wall -Wextra -Werror -I $(INCLUDE_DIR)
+FLAG = -Wall -Wextra -Werror -g3 -I $(INCLUDE_DIR)
 
 LIBFT = ./libft/libft.a
 
 SRCS_DIR = ./srcs/
 
 SRCS = main.c \
+		init/init.c \
+		map/check_file.c \
+		map/check_map.c \
+		map/make_map.c \
 		utils/get_next_line.c \
 		utils/utils.c
 
@@ -53,11 +57,13 @@ all: $(NAME)
 	@echo $(YELLOW) "Compiling...\t" $< $(EOC) $(LINE_CLEAR)
 	@$(CC) $(FLAG) -c $< -o $@
 
-$(NAME): $(MAN_OBJS) $(LIBFT) $(MLX) 
+# $(NAME): $(MAN_OBJS) $(LIBFT) $(MLX) 
+$(NAME): $(MAN_OBJS) $(LIBFT)
 	@echo $(GREEN) "Source files are compiled!\n" $(EOC)
 	@echo $(WHITE) "Building $(NAME) for" $(YELLOW) "Mandatory" $(WHITE) "..." $(EOC)
-	@$(CC) $(FLAG) $(LIBFT) $(MLXFLAG) -o $@ $(MAN_OBJS)
-	@install_name_tool -change libmlx.dylib $(MLX) $(NAME)
+	# @$(CC) $(FLAG) $(LIBFT) $(MLXFLAG) -o $@ $(MAN_OBJS)
+	@$(CC) $(FLAG) $(LIBFT) -o $@ $(MAN_OBJS)
+	# @install_name_tool -change libmlx.dylib $(MLX) $(NAME)
 
 $(MLX):
 	@make -s -C ./mlx

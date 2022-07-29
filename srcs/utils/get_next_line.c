@@ -6,7 +6,7 @@
 /*   By: hyunjcho <hyunjcho@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 17:34:35 by hyunjcho          #+#    #+#             */
-/*   Updated: 2022/07/27 18:20:40 by hyunjcho         ###   ########.fr       */
+/*   Updated: 2022/07/29 17:19:00 by hyunjcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	ft_len(char *s)
 	return (i);
 }
 
-static int	ft_strchr(char *s)
+static int	find_new_line(char *s)
 {
 	int	i;
 
@@ -86,7 +86,7 @@ char	*get_next_line(int fd)
 	ret = ft_calloc(1, sizeof(char));
 	if (!ret)
 		return (NULL);
-	while (ft_strchr(ret))
+	while (find_new_line(ret))
 	{
 		if (!buf[0])
 		{

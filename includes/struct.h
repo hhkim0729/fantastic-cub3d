@@ -20,11 +20,21 @@ typedef struct s_map
 	int		height;
 	int		floor;
 	int		ceil;
-	int		**map;
+	char	**map;
 	char	*north;
 	char	*south;
 	char	*west;
 	char	*east;
+	int		start;
+	int		end;
+	int		player;
+	char	start_dir;
 }	t_map;
+
+typedef struct s_info
+{
+	t_map		*map;
+	t_player	*player;
+}	t_info;
 
 #endif
