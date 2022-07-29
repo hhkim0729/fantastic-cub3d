@@ -69,13 +69,19 @@ void	check_color(t_map *map, char *line)
 	to_rgb(map, color, line[0]);
 }
 
-void	map_check(t_map *map, char *line)
+void	check_map(t_map *map, char line)
+{
+	
+}
+
+void	check_mapfile(t_map *map, char *line)
 {
 	if (!ft_strncmp(line, "NO ", 3) || !ft_strncmp(line, "SO ", 3) \
 		|| !ft_strncmp(line, "WE ", 3) || !ft_strncmp(line, "EA ", 3))
 		check_texture(map, line, line[0]);
 	else if (!ft_strncmp(line, "F ", 2) || !ft_strncmp(line, "C ", 2))
 		check_color(map, line);
+	check_map(map, line);
 }
 
 int	check_filename(char *path)
@@ -104,10 +110,9 @@ int main(int ac, char **av)
 	line = get_next_line(fd);
 	while (line)
 	{
-		map_check(&map, line);
+		check_mapfile(&map, line);
 		free(line);
 		line = get_next_line(fd);
 	}
-	printf("%d: floor, %d: ceil\n", map.floor, map.ceil);
 	return (0);
 }
