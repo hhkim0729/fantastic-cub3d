@@ -50,7 +50,11 @@ void	print_info(t_info *info)
 {
 	printf("========= map =========\n");
 	for (int i = 0; i < info->map->height; i++)
-		printf("%s\n", info->map->map[i]);
+	{
+		for (int j = 0; j < info->map->width; j++)
+			printf("%c", info->map->map[i][j]);
+		printf("\n");
+	}
 	printf("======== player ======= \n");
 	printf("strart_dir: %c\n", info->map->start_dir);
 	printf("pos_x: %f, pos_y: %f\n", info->player->pos.x, info->player->pos.y);
