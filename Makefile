@@ -6,7 +6,7 @@
 #    By: hyunjcho <hyunjcho@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/20 15:39:52 by hyunjcho          #+#    #+#              #
-#    Updated: 2022/07/29 17:46:08 by hyunjcho         ###   ########.fr        #
+#    Updated: 2022/08/01 14:38:08 by hyunjcho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,13 +57,11 @@ all: $(NAME)
 	@echo $(YELLOW) "Compiling...\t" $< $(EOC) $(LINE_CLEAR)
 	@$(CC) $(FLAG) -c $< -o $@
 
-# $(NAME): $(MAN_OBJS) $(LIBFT) $(MLX) 
-$(NAME): $(MAN_OBJS) $(LIBFT)
+$(NAME): $(MAN_OBJS) $(LIBFT) $(MLX)
 	@echo $(GREEN) "Source files are compiled!\n" $(EOC)
 	@echo $(WHITE) "Building $(NAME) for" $(YELLOW) "Mandatory" $(WHITE) "..." $(EOC)
-	# @$(CC) $(FLAG) $(LIBFT) $(MLXFLAG) -o $@ $(MAN_OBJS)
-	@$(CC) $(FLAG) $(LIBFT) -o $@ $(MAN_OBJS)
-	# @install_name_tool -change libmlx.dylib $(MLX) $(NAME)
+	@$(CC) $(FLAG) $(LIBFT) $(MLXFLAG) -o $@ $(MAN_OBJS)
+	@install_name_tool -change libmlx.dylib $(MLX) $(NAME)
 
 $(MLX):
 	@make -s -C ./mlx

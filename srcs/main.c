@@ -42,7 +42,7 @@ static void	read_mapfile(t_map *map, char *path) {
 	}
 	check_info(map);
 	if (!map->player)
-		exit_error("There is no player\n");
+		exit_error("There is no player");
 	close(fd);
 }
 
@@ -51,9 +51,7 @@ void	print_info(t_info *info)
 	printf("========= map =========\n");
 	for (int i = 0; i < info->map->height; i++)
 	{
-		for (int j = 0; j < info->map->width; j++)
-			printf("%c", info->map->map[i][j]);
-		printf("\n");
+		printf("|%s|\n", info->map->map[i]);
 	}
 	printf("======== player ======= \n");
 	printf("strart_dir: %c\n", info->map->start_dir);
@@ -70,6 +68,6 @@ int main(int ac, char **av)
 	read_mapfile(info.map, av[1]);
 	init_player(&info);
 	make_map(&info, av[1]);
-	print_info(&info);
+	print_info(&info);	
 	return (0);
 }

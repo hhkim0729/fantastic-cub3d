@@ -9,7 +9,6 @@ static void	fill_map(t_info *info, char *line, int fd)
 	while (line)
 	{
 		info->map->map[i] = ft_calloc(info->map->width, sizeof(char));
-		
 		j = 0;
 		while(line[j] && line[j] != '\n')
 		{
@@ -24,7 +23,7 @@ static void	fill_map(t_info *info, char *line, int fd)
 			}
 			j++;
 		}
-		while (j < info->map->width)
+		while (j < info->map->width - 1)
 			info->map->map[i][j++] = ' ';
 		free(line);
 		line = get_next_line(fd);
