@@ -18,8 +18,8 @@ static void	fill_map(t_info *info, char *line, int fd)
 				info->map->map[i][j] = line[j];
 			if (line[j] == info->map->start_dir)
 			{
-				info->player->pos.x = j;
-				info->player->pos.y = i;
+				info->player->pos.x = j + 0.5;
+				info->player->pos.y = i + 0.5;
 			}
 			j++;
 		}

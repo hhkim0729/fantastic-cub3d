@@ -27,7 +27,28 @@ void	init_info(t_info *info)
 
 void	init_player(t_info *info)
 {
+	t_player	*player;
+	char		dir;
+
 	info->player = (t_player *)malloc(sizeof(t_player));
 	if (!info->player)
 		exit(EXIT_FAILURE);
+	player = info->player;
+	dir = info->map->start_dir;
+	player->dir.x = 0;
+	player->dir.y = -1;
+	player->plane.x = 0.66;
+	player->plane.y = 0;
+	if (dir == 'S')
+		player->dir.y = 1;
+	else if (dir == 'W' || dir == 'E')
+	{
+		player->plane.x = 0;
+		player->plane.y = 0.66;
+		player->dir.y = 0;
+		if (dir == 'W')
+			player->dir.x = -1;
+		else
+			player->dir.x = 1;
+	}
 }

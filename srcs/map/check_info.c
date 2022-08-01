@@ -61,7 +61,7 @@ void	check_color(t_map *map, char *line)
 			i++;
 		if (line[i] && line[i] != ',')
 			exit_error("Usage: [R, G, B]\n");
-		if (line[i++] == ',')
+		if (line[i] && line[i++] == ',')
 			cnt++;
 	}
 	if (cnt != 2)

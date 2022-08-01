@@ -56,6 +56,14 @@ void	print_info(t_info *info)
 	printf("======== player ======= \n");
 	printf("strart_dir: %c\n", info->map->start_dir);
 	printf("pos_x: %f, pos_y: %f\n", info->player->pos.x, info->player->pos.y);
+	printf("dir_x: %f, dir_y: %f\n", info->player->dir.x, info->player->dir.y);
+	}
+
+int	force_quit(t_info *info)
+{
+	// destroy_all(g);
+	(void)info;
+	exit(EXIT_SUCCESS);
 }
 
 int main(int ac, char **av)
@@ -68,6 +76,17 @@ int main(int ac, char **av)
 	read_mapfile(info.map, av[1]);
 	init_player(&info);
 	make_map(&info, av[1]);
-	print_info(&info);	
+
+	print_info(&info);
+	info.mlx = mlx_init();
+	if (!info.mlx)
+		exit_error("mlx init error"); // free 체크
+	info.window = mlx_new_window(info.mlx, SCREEN_X, SCREEN_Y, "cub3D");
+	if (!info.window)
+		exit_error("mlx window create error"); // free
+	mlx_loop_hook(info.mlx, draw_screen, &info);
+	mlx_hook(info.window, PRESS_KEY, 0, play, &info);
+	mlx_hook(info.window, MOUSE_EXIT, 0, force_quit, &info);
+	mlx_loop(info.mlx);
 	return (0);
 }

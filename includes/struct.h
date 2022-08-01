@@ -10,7 +10,7 @@ typedef struct s_vector
 typedef struct s_player
 {
 	t_vector	pos;
-	t_vector	cam;
+	t_vector	plane;
 	t_vector	dir;
 }	t_player;
 
@@ -31,10 +31,30 @@ typedef struct s_map
 	char	start_dir;
 }	t_map;
 
+typedef struct s_args
+{
+	double	cam_x;
+	double	ray_x;
+	double	ray_y;
+	int		map_x;
+	int		map_y;
+	double	side_x;
+	double	side_y;
+	double	delta_x;
+	double	delta_y;
+	int		step_x;
+	int		step_y;
+	double	perp_wall;
+	int		hit;
+	int		side;
+}	t_args;
+
 typedef struct s_info
 {
 	t_map		*map;
 	t_player	*player;
+	void		*mlx;
+	void		*window;
 }	t_info;
 
 #endif

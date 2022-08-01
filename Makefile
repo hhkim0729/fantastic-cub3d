@@ -6,7 +6,7 @@
 #    By: hyunjcho <hyunjcho@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/20 15:39:52 by hyunjcho          #+#    #+#              #
-#    Updated: 2022/08/01 14:38:08 by hyunjcho         ###   ########.fr        #
+#    Updated: 2022/08/01 19:15:15 by hyunjcho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,9 +35,11 @@ SRCS_DIR = ./srcs/
 
 SRCS = main.c \
 		init/init.c \
-		map/check_file.c \
+		map/check_info.c \
 		map/check_map.c \
 		map/make_map.c \
+		play/draw.c \
+		play/play.c \
 		utils/get_next_line.c \
 		utils/utils.c
 
