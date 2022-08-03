@@ -1,7 +1,7 @@
 #ifndef MAP_H
 # define MAP_H
 
-#include "cub3d.h"
+# include "cub3d.h"
 
 // check_file.c
 void	check_texture(t_map *map, char *line, char c);

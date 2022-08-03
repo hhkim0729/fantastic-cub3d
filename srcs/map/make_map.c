@@ -9,11 +9,13 @@ static void	fill_map(t_info *info, char *line, int fd)
 	while (line)
 	{
 		info->map->map[i] = ft_calloc(info->map->width, sizeof(char));
+		if (!info->map->map[i])
+			exit(EXIT_FAILURE);
 		j = 0;
-		while(line[j] && line[j] != '\n')
+		while (line[j] && line[j] != '\n')
 		{
 			if (ft_isspace(line[j]))
-				info->map->map[i][j] = ' '; 
+				info->map->map[i][j] = ' ';
 			else
 				info->map->map[i][j] = line[j];
 			if (line[j] == info->map->start_dir)
@@ -45,19 +47,15 @@ void	make_map(t_info *info, char *file)
 		exit(EXIT_FAILURE);
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
-		exit_error("File open error"); //error
+		exit_error("File open error");
 	count = 0;
 	line = get_next_line(fd);
-	while (line)
+	while (line && ++count <= map->start - 1)
 	{
-		if (++count > map->start - 1)
-		{
-			fill_map(info, line, fd);
-			break;
-		}
 		free(line);
 		line = get_next_line(fd);
 	}
+	fill_map(info, line, fd);
 	close(fd);
 	check_wall(info);
 }

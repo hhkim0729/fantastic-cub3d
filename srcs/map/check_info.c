@@ -14,7 +14,7 @@ void	check_texture(t_map *map, char *line, char c)
 	// 	exit(EXIT_FAILURE); //error
 	tmp = ft_strdup(line + i);
 	if (!tmp)
-		exit(EXIT_FAILURE); //error
+		exit(EXIT_FAILURE);
 	if (c == 'N')
 		map->north = tmp;
 	else if (c == 'S')
@@ -72,7 +72,7 @@ void	check_color(t_map *map, char *line)
 void	check_info(t_map *map)
 {
 	if (!(map->north && map->south && map->west && map->east))
-		exit(EXIT_FAILURE); // error
+		exit(EXIT_FAILURE);
 	if (map->floor < 0 || map->ceil < 0)
 		exit(EXIT_FAILURE);
 }

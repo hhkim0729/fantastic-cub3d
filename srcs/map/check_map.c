@@ -40,12 +40,12 @@ void	check_wall(t_info *info)
 		{
 			if (map[i][j] == '0' || map[i][j] == info->map->start_dir)
 			{
-				if (i == 0 || i == info->map->height - 1 || j == 0 || j == info->map->width - 1)
+				if (i == 0 || i == info->map->height - 1 \
+					|| j == 0 || j == info->map->width - 1)
 					exit_error("The wall is must be surrounded by 1");
 				else if (map[i + 1][j] == ' ' || map[i - 1][j] == ' ' || \
 					map[i][j + 1] == ' ' || map[i][j - 1] == ' ')
 					exit_error("The wall is must be surrounded by 1");
-
 			}
 		}
 	}
