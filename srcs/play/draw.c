@@ -27,10 +27,10 @@ static void	draw_line(t_info *info, int x, t_args *args)
 
 	line_height = (int)(SCREEN_Y / args->perp_wall);
 	draw_start = -line_height / 2 + SCREEN_Y / 2;
-	if(draw_start < 0)
+	if (draw_start < 0)
 		draw_start = 0;
 	draw_end = line_height / 2 + SCREEN_Y / 2;
-	if(draw_end >= SCREEN_Y)
+	if (draw_end >= SCREEN_Y)
 		draw_end = SCREEN_Y - 1;
 	if (info->map->map[args->map_y][args->map_x] == '1')
 		color = 0xFF0000;
@@ -46,7 +46,7 @@ static void	draw_line(t_info *info, int x, t_args *args)
 int	draw_screen(t_info *info)
 {
 	t_args	args;
-	int	x;
+	int		x;
 
 	x = 0;
 	clear_screen(info);
