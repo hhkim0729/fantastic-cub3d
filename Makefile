@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hyunjcho <hyunjcho@student.42seoul.kr>     +#+  +:+       +#+         #
+#    By: heehkim <heehkim@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/20 15:39:52 by hyunjcho          #+#    #+#              #
-#    Updated: 2022/08/01 19:15:15 by hyunjcho         ###   ########.fr        #
+#    Updated: 2022/08/03 20:25:29 by heehkim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,9 +47,16 @@ MAN_SRCS = $(addprefix $(SRCS_DIR), $(SRCS))
 
 MAN_OBJS = $(MAN_SRCS:.c=.o)
 
-MLX = ./mlx/libmlx.dylib
+MODE = EVAL
+ifeq ($(MODE), EVAL)
+	MLX_DIR = ./mlx
+else ifeq ($(MODE), M1)
+	MLX_DIR = ./mlx_m1
+endif
 
-MLXFLAG = -L./mlx -lmlx -framework OpenGL -framework AppKit
+MLX = $(MLX_DIR)/libmlx.dylib
+
+MLXFLAG = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
 
 vpath %.c $(SRCS_DIR)
 
@@ -66,14 +73,14 @@ $(NAME): $(MAN_OBJS) $(LIBFT) $(MLX)
 	@install_name_tool -change libmlx.dylib $(MLX) $(NAME)
 
 $(MLX):
-	@make -s -C ./mlx
+	@make -s -C $(MLX_DIR)
 
 $(LIBFT):
 	@make -s -C ./libft
 
 clean:
 	@$(RM) $(MAN_OBJS)
-	@make clean -s -C ./mlx
+	make clean -C $(MLX_DIR)
 	@make clean -s -C ./libft
 	@echo $(CYAN) "Cleaning..."
 	
