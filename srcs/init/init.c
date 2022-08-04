@@ -40,15 +40,20 @@ void	init_player(t_info *info)
 	player->plane.x = 0.66;
 	player->plane.y = 0;
 	if (dir == 'S')
+	{
+		player->plane.x = -0.66;
 		player->dir.y = 1;
+	}
 	else if (dir == 'W' || dir == 'E')
 	{
 		player->plane.x = 0;
-		player->plane.y = 0.66;
+		player->plane.y = -0.66;
+		player->dir.x = -1;
 		player->dir.y = 0;
-		if (dir == 'W')
-			player->dir.x = -1;
-		else
+		if (dir == 'E')
+		{
 			player->dir.x = 1;
+			player->plane.y = 0.66;
+		}
 	}
 }

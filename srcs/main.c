@@ -57,6 +57,7 @@ void	print_info(t_info *info)
 	printf("strart_dir: %c\n", info->map->start_dir);
 	printf("pos_x: %f, pos_y: %f\n", info->player->pos.x, info->player->pos.y);
 	printf("dir_x: %f, dir_y: %f\n", info->player->dir.x, info->player->dir.y);
+	printf("plane_x: %f, plane_y: %f\n", info->player->plane.x, info->player->plane.y);
 }
 
 int	force_quit(t_info *info)
