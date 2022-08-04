@@ -41,15 +41,12 @@ static void	rotate(t_player *player, double sin_val, double cos_val)
 	double	old_dir_x;
 	double	old_plane_x;
 
-	printf("sin_val: %f\ncos_val: %f\n", sin_val, cos_val);
 	old_dir_x = player->dir.x;
 	player->dir.x = player->dir.x * cos_val - player->dir.y * sin_val;
 	player->dir.y = old_dir_x * sin_val + player->dir.y * cos_val;
 	old_plane_x = player->plane.x;
 	player->plane.x = player->plane.x * cos_val - player->plane.y * sin_val;
 	player->plane.y = old_plane_x * sin_val + player->plane.y * cos_val;
-	printf("dir_x: %f, dir_y: %f\n", player->dir.x, player->dir.y);
-	printf("plane_x: %f, plane_y: %f\n", player->plane.x, player->plane.y);
 }
 
 int	play(int key, t_info *info)
