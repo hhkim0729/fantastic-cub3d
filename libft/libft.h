@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyunjcho <hyunjcho@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: heehkim <heehkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 13:10:45 by hyunjcho          #+#    #+#             */
-/*   Updated: 2022/07/29 17:17:17 by hyunjcho         ###   ########.fr       */
+/*   Updated: 2022/08/04 17:40:49 by heehkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		ft_isalpha(int c);
 int		ft_isalnum(int c);
 int		ft_strlen(const char *str);
 char	*ft_itoa(int n);
-char	*ft_strdup(const char *s1);
+char	*ft_strdup(const char *s1, int count);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	**ft_split(char const *s, char c);

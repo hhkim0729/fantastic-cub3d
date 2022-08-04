@@ -5,5 +5,6 @@
 
 void	init_info(t_info *info);
 void	init_player(t_info *info);
+void	init_texture(t_info *info);
 
 #endif

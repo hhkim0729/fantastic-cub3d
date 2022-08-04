@@ -1,22 +1,21 @@
 #include "init.h"
 
-static void	init_map(t_map *map)
+static void init_map(t_map *map)
 {
 	map->width = 0;
 	map->height = 0;
 	map->floor = -1;
 	map->ceil = -1;
 	map->map = NULL;
-	map->north = NULL;
-	map->south = NULL;
-	map->west = NULL;
-	map->east = NULL;
+	map->tex_files = (char **)ft_calloc(4, sizeof(char *));
+	if (!map->tex_files)
+		exit(EXIT_FAILURE);
 	map->start = 0;
 	map->end = 0;
 	map->player = 0;
 }
 
-void	init_info(t_info *info)
+void init_info(t_info *info)
 {
 	info->map = (t_map *)malloc(sizeof(t_map));
 	if (!info->map)
@@ -40,10 +39,10 @@ void	init_info(t_info *info)
 		exit_error("mlx image data create error"); // free
 }
 
-void	init_player(t_info *info)
+void init_player(t_info *info)
 {
-	t_player	*player;
-	char		dir;
+	t_player *player;
+	char dir;
 
 	info->player = (t_player *)malloc(sizeof(t_player));
 	if (!info->player)
@@ -70,5 +69,47 @@ void	init_player(t_info *info)
 			player->dir.x = 1;
 			player->plane.y = 0.66;
 		}
+	}
+}
+
+static void	load_image(t_info *info, int *texture, char *path)
+{
+	int		x;
+	int		y;
+	t_img	img;
+
+	img.img = mlx_xpm_file_to_image(info->mlx, path, &img.img_width, &img.img_height);
+	img.data = (int *)mlx_get_data_addr(img.img, &img.bpp, &img.size_l, &img.endian);
+	y = 0;
+	while (y < img.img_height)
+	{
+		x = 0;
+		while (x < img.img_width)
+		{
+			texture[img.img_width * y + x] = img.data[img.img_width * y + x];
+			x++;
+		}
+		y++;
+	}
+	mlx_destroy_image(info->mlx, img.img);
+}
+
+void	init_texture(t_info *info)
+{
+	int i;
+	t_map	*map;
+
+	map = info->map;
+	map->texture = (int **)ft_calloc(4, sizeof(int *));
+	if (!map->texture)
+		exit(EXIT_FAILURE);
+	i = 0;
+	while (i < 4)
+	{
+		map->texture[i] = (int *)ft_calloc(TEX_WIDTH * TEX_HEIGHT, sizeof(int));
+		if (!map->texture[i])
+			exit(EXIT_FAILURE);
+		load_image(info, map->texture[i], map->tex_files[i]);
+		i++;
 	}
 }

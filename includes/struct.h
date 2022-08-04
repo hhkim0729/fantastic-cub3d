@@ -21,14 +21,12 @@ typedef struct s_map
 	int		floor;
 	int		ceil;
 	char	**map;
-	char	*north;
-	char	*south;
-	char	*west;
-	char	*east;
+	char	**tex_files;
 	int		start;
 	int		end;
 	int		player;
 	char	start_dir;
+	int		**texture;
 }	t_map;
 
 typedef struct s_args
@@ -47,6 +45,11 @@ typedef struct s_args
 	double	perp_wall;
 	int		hit;
 	int		side;
+	double	wall_x;
+	int		tex_x;
+	int		tex_y;
+	double	step;
+	double	tex_pos;
 }	t_args;
 
 typedef struct s_img
@@ -56,6 +59,8 @@ typedef struct s_img
 	int		size_l;
 	int		bpp;
 	int		endian;
+	int		img_width;
+	int		img_height;
 }	t_img;
 
 typedef struct s_info

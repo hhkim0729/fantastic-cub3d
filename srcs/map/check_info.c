@@ -2,28 +2,23 @@
 
 void	check_texture(t_map *map, char *line, char c)
 {
-	int		fd;
 	int		i;
 	char	*tmp;
 
 	i = 3;
 	while (ft_isspace(line[i]))
 		i++;
-	fd = open(line + i, O_RDONLY);
-	// if (fd < 0)
-	// 	exit(EXIT_FAILURE); //error
-	tmp = ft_strdup(line + i);
+	tmp = ft_strdup(line + i, ft_strlen(line + i) - 1);
 	if (!tmp)
 		exit(EXIT_FAILURE);
 	if (c == 'N')
-		map->north = tmp;
+		map->tex_files[NORTH] = tmp;
 	else if (c == 'S')
-		map->south = tmp;
-	else if (c == 'W')
-		map->west = tmp;
+		map->tex_files[SOUTH] = tmp;
+	else if (c == 'E')
+		map->tex_files[EAST] = tmp;
 	else
-		map->east = tmp;
-	// close(fd);
+		map->tex_files[WEST] = tmp;
 }
 
 static void	to_rgb(t_map *map, int *color, char c)
@@ -74,8 +69,15 @@ void	check_color(t_map *map, char *line)
 
 void	check_info(t_map *map)
 {
-	if (!(map->north && map->south && map->west && map->east))
-		exit(EXIT_FAILURE);
+	int	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		if (!map->tex_files[i])
+			exit_error("tex file error");
+		i++;
+	}
 	if (map->floor < 0 || map->ceil < 0)
 		exit(EXIT_FAILURE);
 }

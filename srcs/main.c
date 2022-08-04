@@ -1,8 +1,8 @@
 #include "cub3d.h"
 
-static int	check_filename(char *path)
+static int check_filename(char *path)
 {
-	int	len;
+	int len;
 
 	len = ft_strlen(path);
 	if (ft_strcmp(".cub", path + len - 4) == 0)
@@ -10,12 +10,11 @@ static int	check_filename(char *path)
 	return (FALSE);
 }
 
-static void	check_mapfile(t_map *map, char *line)
+static void check_mapfile(t_map *map, char *line)
 {
 	if (line[0] == '\n')
-		return ;
-	if (!ft_strncmp(line, "NO ", 3) || !ft_strncmp(line, "SO ", 3) \
-		|| !ft_strncmp(line, "WE ", 3) || !ft_strncmp(line, "EA ", 3))
+		return;
+	if (!ft_strncmp(line, "NO ", 3) || !ft_strncmp(line, "SO ", 3) || !ft_strncmp(line, "WE ", 3) || !ft_strncmp(line, "EA ", 3))
 		check_texture(map, line, line[0]);
 	else if (!ft_strncmp(line, "F ", 2) || !ft_strncmp(line, "C ", 2))
 		check_color(map, line);
@@ -23,10 +22,10 @@ static void	check_mapfile(t_map *map, char *line)
 		check_valid_word(map, line);
 }
 
-static void	read_mapfile(t_map *map, char *path)
+static void read_mapfile(t_map *map, char *path)
 {
-	int		fd;
-	char	*line;
+	int fd;
+	char *line;
 
 	if (check_filename(path) == FALSE)
 		exit_error("Invalid file");
@@ -48,7 +47,7 @@ static void	read_mapfile(t_map *map, char *path)
 }
 
 // 나중에 삭제!
-void	print_info(t_info *info)
+void print_info(t_info *info)
 {
 	printf("========= map =========\n");
 	for (int i = 0; i < info->map->height; i++)
@@ -58,18 +57,21 @@ void	print_info(t_info *info)
 	printf("pos_x: %f, pos_y: %f\n", info->player->pos.x, info->player->pos.y);
 	printf("dir_x: %f, dir_y: %f\n", info->player->dir.x, info->player->dir.y);
 	printf("plane_x: %f, plane_y: %f\n", info->player->plane.x, info->player->plane.y);
+	for (int j = 0; j < 4; j++) {
+		printf("tex[%d]: %s\n", j, info->map->tex_files[j]);
+	}
 }
 
-int	force_quit(t_info *info)
+int force_quit(t_info *info)
 {
 	// destroy_all(g);
 	(void)info;
 	exit(EXIT_SUCCESS);
 }
 
-int	main(int ac, char **av)
+int main(int ac, char **av)
 {
-	t_info	info;
+	t_info info;
 
 	if (ac != 2)
 		exit_error("Usage: ./cub3D map.cub");
@@ -77,6 +79,7 @@ int	main(int ac, char **av)
 	read_mapfile(info.map, av[1]);
 	init_player(&info);
 	make_map(&info, av[1]);
+	init_texture(&info);
 	print_info(&info);
 	mlx_loop_hook(info.mlx, draw_screen, &info);
 	mlx_hook(info.window, PRESS_KEY, 0, play, &info);

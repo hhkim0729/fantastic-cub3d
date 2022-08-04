@@ -2,13 +2,13 @@
 
 static void	move(char **map, t_player *player, int key)
 {
-	int		x;
-	int		y;
+	double		x;
+	double		y;
 	double	x_offset;
 	double	y_offset;
 
-	x = (int)player->pos.x;
-	y = (int)player->pos.y;
+	x = player->pos.x;
+	y = player->pos.y;
 	if (key == KEY_A)
 	{
         x_offset = player->plane.x * MOVE_SPEED * -1;
@@ -31,9 +31,12 @@ static void	move(char **map, t_player *player, int key)
 	}
 	if (map[(int)(y + y_offset)][(int)(x + x_offset)] != '1')
 	{
-	    player->pos.x = player->pos.x + x_offset;
-	    player->pos.y = player->pos.y + y_offset;
+	    player->pos.x = x + x_offset;
+	    player->pos.y = y + y_offset;
 	}
+	// printf("(( x: %f | y: %f ))\n", x + x_offset, y + y_offset);
+	// printf("(( x: %d | y: %d ))\n", (int)(x + x_offset), (int)(y + y_offset));
+	// printf("** pos_x: %f | pos_y: %f **\n", player->pos.x, player->pos.y);
 }
 
 static void	rotate(t_player *player, double sin_val, double cos_val)
