@@ -59,10 +59,13 @@ void	check_color(t_map *map, char *line)
 			i++;
 		while (ft_isspace(line[i]) || line[i] == '\n')
 			i++;
-		if (line[i] && line[i] != ',')
+		if (line[i] && line[i] != ',' && !ft_isdigit(line[i]))
 			exit_error("Usage: [R, G, B]\n");
-		if (line[i] && line[i++] == ',')
+		if (line[i] && line[i] == ',')
+		{
+			i++;
 			cnt++;
+		}
 	}
 	if (cnt != 2)
 		exit_error("Usage: [R, G, B]\n");

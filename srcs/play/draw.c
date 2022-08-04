@@ -1,6 +1,6 @@
 #include "play.h"
 
-static void	clear_screen(t_info *info)
+static void	draw_floor_ceiling(t_info *info)
 {
 	int	x;
 	int	y;
@@ -11,11 +11,15 @@ static void	clear_screen(t_info *info)
 		y = 0;
 		while (y < SCREEN_Y)
 		{
-			mlx_pixel_put(info->mlx, info->window, x, y, 0x000000);
+			if (y < SCREEN_Y / 2)
+				info->img->data[y * SCREEN_X + x] = info->map->ceil;
+			else
+				info->img->data[y * SCREEN_X + x] = info->map->floor;
 			y++;
 		}
 		x++;
 	}
+	mlx_put_image_to_window(info->mlx, info->window, info->img->img, 0, 0);
 }
 
 static void	draw_line(t_info *info, int x, t_args *args)
@@ -49,7 +53,7 @@ int	draw_screen(t_info *info)
 	int		x;
 
 	x = 0;
-	clear_screen(info);
+	draw_floor_ceiling(info);
 	while (x < SCREEN_X)
 	{
 		args.cam_x = 2 * x / (double)SCREEN_X - 1;

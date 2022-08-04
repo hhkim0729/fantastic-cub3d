@@ -78,12 +78,6 @@ int	main(int ac, char **av)
 	init_player(&info);
 	make_map(&info, av[1]);
 	print_info(&info);
-	info.mlx = mlx_init();
-	if (!info.mlx)
-		exit_error("mlx init error"); // free 체크
-	info.window = mlx_new_window(info.mlx, SCREEN_X, SCREEN_Y, "cub3D");
-	if (!info.window)
-		exit_error("mlx window create error"); // free
 	mlx_loop_hook(info.mlx, draw_screen, &info);
 	mlx_hook(info.window, PRESS_KEY, 0, play, &info);
 	mlx_hook(info.window, MOUSE_EXIT, 0, force_quit, &info);

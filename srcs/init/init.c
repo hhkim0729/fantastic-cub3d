@@ -23,6 +23,21 @@ void	init_info(t_info *info)
 		exit(EXIT_FAILURE);
 	init_map(info->map);
 	info->player = NULL;
+	info->img = (t_img *)malloc(sizeof(t_img));
+	if (!info->img)
+		exit(EXIT_FAILURE);
+	info->mlx = mlx_init();
+	if (!info->mlx)
+		exit_error("mlx init error"); // free 체크
+	info->window = mlx_new_window(info->mlx, SCREEN_X, SCREEN_Y, "cub3D");
+	if (!info->window)
+		exit_error("mlx window create error"); // free
+	info->img->img = mlx_new_image(info->mlx, SCREEN_X, SCREEN_Y);
+	if (!info->img->img)
+		exit_error("mlx image create error"); // free
+	info->img->data = (int *)mlx_get_data_addr(info->img->img, &info->img->bpp, &info->img->size_l, &info->img->endian);
+	if (!info->img->data)
+		exit_error("mlx image data create error"); // free
 }
 
 void	init_player(t_info *info)
