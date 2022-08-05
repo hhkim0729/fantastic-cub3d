@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: heehkim <heehkim@student.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/05 17:54:55 by heehkim           #+#    #+#             */
+/*   Updated: 2022/08/05 18:12:01 by heehkim          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
-static int check_filename(char *path)
+static int	check_filename(char *path)
 {
-	int len;
+	int	len;
 
 	len = ft_strlen(path);
 	if (ft_strcmp(".cub", path + len - 4) == 0)
@@ -10,11 +22,12 @@ static int check_filename(char *path)
 	return (FALSE);
 }
 
-static void check_mapfile(t_map *map, char *line)
+static void	check_mapfile(t_map *map, char *line)
 {
 	if (line[0] == '\n')
-		return;
-	if (!ft_strncmp(line, "NO ", 3) || !ft_strncmp(line, "SO ", 3) || !ft_strncmp(line, "WE ", 3) || !ft_strncmp(line, "EA ", 3))
+		return ;
+	if (!ft_strncmp(line, "NO ", 3) || !ft_strncmp(line, "SO ", 3) \
+		|| !ft_strncmp(line, "WE ", 3) || !ft_strncmp(line, "EA ", 3))
 		check_texture(map, line, line[0]);
 	else if (!ft_strncmp(line, "F ", 2) || !ft_strncmp(line, "C ", 2))
 		check_color(map, line);
@@ -22,16 +35,16 @@ static void check_mapfile(t_map *map, char *line)
 		check_valid_word(map, line);
 }
 
-static void read_mapfile(t_map *map, char *path)
+static void	read_mapfile(t_map *map, char *path)
 {
-	int fd;
-	char *line;
+	int		fd;
+	char	*line;
 
 	if (check_filename(path) == FALSE)
-		exit_error("Invalid file");
+		exit_error("Invalid map file");
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
-		exit_error("File open error");
+		exit_error("Failed to open file");
 	line = get_next_line(fd);
 	while (line)
 	{
@@ -42,12 +55,12 @@ static void read_mapfile(t_map *map, char *path)
 	}
 	check_info(map);
 	if (!map->player)
-		exit_error("There is no player");
+		exit_error("No player");
 	close(fd);
 }
 
 // 나중에 삭제!
-void print_info(t_info *info)
+void	print_info(t_info *info)
 {
 	printf("========= map =========\n");
 	for (int i = 0; i < info->map->height; i++)
@@ -57,27 +70,25 @@ void print_info(t_info *info)
 	printf("pos_x: %f, pos_y: %f\n", info->player->pos.x, info->player->pos.y);
 	printf("dir_x: %f, dir_y: %f\n", info->player->dir.x, info->player->dir.y);
 	printf("plane_x: %f, plane_y: %f\n", info->player->plane.x, info->player->plane.y);
-	for (int j = 0; j < 4; j++) {
+	for (int j = 0; j < 4; j++)
 		printf("tex[%d]: %s\n", j, info->map->tex_files[j]);
-	}
 }
 
-int force_quit(t_info *info)
+int	force_quit(void)
 {
-	// destroy_all(g);
-	(void)info;
 	exit(EXIT_SUCCESS);
+	return (0);
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	t_info info;
+	t_info	info;
 
 	if (ac != 2)
 		exit_error("Usage: ./cub3D map.cub");
 	init_info(&info);
 	read_mapfile(info.map, av[1]);
-	init_player(&info);
+	init_player(info.player, info.map->start_dir);
 	make_map(&info, av[1]);
 	init_texture(&info);
 	print_info(&info);

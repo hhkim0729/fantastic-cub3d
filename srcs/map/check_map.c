@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_map.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: heehkim <heehkim@student.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/05 17:55:27 by heehkim           #+#    #+#             */
+/*   Updated: 2022/08/05 18:20:19 by heehkim          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "map.h"
 
 void	check_valid_word(t_map *map, char *line)
@@ -11,14 +23,14 @@ void	check_valid_word(t_map *map, char *line)
 		if (ft_strchr("NSWE", line[i]))
 		{
 			if (map->player > 0)
-				exit_error("There are many players!!\n");
+				exit_error("Too many players");
 			map->player = 1;
 			map->start_dir = line[i];
 		}
 		i++;
 	}
 	if (line[i] && line[i] != '\n')
-		exit_error("There is a invalid word\n");
+		exit_error("Invalid character");
 	if (i > map->width)
 		map->width = i;
 	if (map->start == 0)
@@ -42,10 +54,10 @@ void	check_wall(t_info *info)
 			{
 				if (i == 0 || i == info->map->height - 1 \
 					|| j == 0 || j == info->map->width - 1)
-					exit_error("The wall is must be surrounded by 1");
+					exit_error("Not surrounded by wall");
 				else if (map[i + 1][j] == ' ' || map[i - 1][j] == ' ' || \
 					map[i][j + 1] == ' ' || map[i][j - 1] == ' ')
-					exit_error("The wall is must be surrounded by 1");
+					exit_error("Not surrounded by wall");
 			}
 		}
 	}

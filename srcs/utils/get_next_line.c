@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyunjcho <hyunjcho@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: heehkim <heehkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 17:34:35 by hyunjcho          #+#    #+#             */
-/*   Updated: 2022/07/29 17:19:00 by hyunjcho         ###   ########.fr       */
+/*   Updated: 2022/08/05 18:11:38 by heehkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
-#include "../libft/libft.h"
 
 static int	ft_len(char *s)
 {
@@ -64,7 +63,7 @@ static char	*make_line(char *s1, char *s2)
 	if (!new_ret)
 	{
 		free(s1);
-		return (NULL);
+		exit_error("Failed to allocate memory");
 	}
 	i = -1;
 	while (++i < s1_len)
@@ -85,7 +84,7 @@ char	*get_next_line(int fd)
 
 	ret = ft_calloc(1, sizeof(char));
 	if (!ret)
-		return (NULL);
+		exit_error("Failed to allocate memory");
 	while (find_new_line(ret))
 	{
 		if (!buf[0])

@@ -6,7 +6,7 @@
 #    By: heehkim <heehkim@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/20 15:39:52 by hyunjcho          #+#    #+#              #
-#    Updated: 2022/08/03 20:25:29 by heehkim          ###   ########.fr        #
+#    Updated: 2022/08/05 17:24:58 by heehkim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,9 @@ SRCS = main.c \
 		map/check_info.c \
 		map/check_map.c \
 		map/make_map.c \
+		play/prepare_draw.c \
 		play/draw.c \
+		play/prepare_play.c \
 		play/play.c \
 		utils/get_next_line.c \
 		utils/utils.c
