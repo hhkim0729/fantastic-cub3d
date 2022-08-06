@@ -6,7 +6,7 @@
 /*   By: heehkim <heehkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 17:55:54 by heehkim           #+#    #+#             */
-/*   Updated: 2022/08/05 17:55:55 by heehkim          ###   ########.fr       */
+/*   Updated: 2022/08/06 22:27:19 by heehkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,52 @@ static void	draw_line(t_info *info, int x, t_args *args)
 	}
 }
 
+static void	draw_square(t_img *img, int x, int y, int color)
+{
+	int	i;
+	int	j;
+	int	size;
+
+	j = 0;
+	size = 8;
+	while (j < size)
+	{
+		i = 0;
+		while (i < size)
+		{
+			img->data[SCREEN_X * (size * x + j) + (size * y) + i] = color;
+			i++;
+		}
+		j++;
+	}
+}
+
+static void	draw_minimap(t_info *info)
+{
+	int	x;
+	int	y;
+	int	color;
+
+	x = 0;
+	while (x < info->map->height)
+	{
+		y = 0;
+		while (y < info->map->width)
+		{
+			if (ft_strchr(" 1", info->map->map[x][y]))
+				color = 0x000000;
+			else if (y == (int)info->player->pos.x \
+					&& x == (int)info->player->pos.y)
+				color = 0xff0000;
+			else
+				color = 0xffffff;
+			draw_square(info->img, x, y, color);
+			y++;
+		}
+		x++;
+	}
+}
+
 int	draw_screen(t_info *info)
 {
 	t_args	args;
@@ -71,6 +117,7 @@ int	draw_screen(t_info *info)
 		draw_line(info, x, &args);
 		x++;
 	}
+	draw_minimap(info);
 	mlx_put_image_to_window(info->mlx, info->window, info->img->img, 0, 0);
 	return (0);
 }
