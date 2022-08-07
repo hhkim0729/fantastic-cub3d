@@ -6,7 +6,7 @@
 /*   By: heehkim <heehkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 17:55:27 by heehkim           #+#    #+#             */
-/*   Updated: 2022/08/05 18:20:19 by heehkim          ###   ########.fr       */
+/*   Updated: 2022/08/07 17:43:37 by heehkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	check_valid_word(t_map *map, char *line)
 	int	i;
 
 	i = 0;
+	check_info(map);
 	while (line[i] && (ft_isspace(line[i]) || line[i] == '0' || line[i] == '1' \
 		|| ft_strchr("NSWE", line[i])))
 	{
