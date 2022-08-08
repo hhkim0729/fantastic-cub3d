@@ -6,7 +6,7 @@
 /*   By: heehkim <heehkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 17:55:56 by heehkim           #+#    #+#             */
-/*   Updated: 2022/08/05 18:16:54 by heehkim          ###   ########.fr       */
+/*   Updated: 2022/08/08 17:56:38 by heehkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,8 @@ int	play(int key, t_info *info)
 		rotate(player, sin(ROT_SPEED), cos(ROT_SPEED));
 	else if (key == KEY_ESC)
 		exit(EXIT_SUCCESS);
+	if (key == KEY_W || key == KEY_S || key == KEY_A || key == KEY_D \
+		|| key == KEY_LEFT || key == KEY_RIGHT)
+		draw_screen(info);
 	return (0);
 }

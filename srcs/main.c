@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyunjcho <hyunjcho@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: heehkim <heehkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 17:54:55 by heehkim           #+#    #+#             */
-/*   Updated: 2022/08/08 17:45:46 by hyunjcho         ###   ########.fr       */
+/*   Updated: 2022/08/08 17:56:14 by heehkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	main(int ac, char **av)
 	init_player(info.player, info.map->start_dir);
 	make_map(&info, av[1]);
 	init_texture(&info);
-	mlx_loop_hook(info.mlx, draw_screen, &info);
+	draw_screen(&info);
 	mlx_hook(info.window, PRESS_KEY, 0, play, &info);
 	mlx_hook(info.window, MOUSE_EXIT, 0, force_quit, &info);
 	mlx_loop(info.mlx);

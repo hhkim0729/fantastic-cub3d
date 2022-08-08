@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyunjcho <hyunjcho@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: heehkim <heehkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 22:30:51 by heehkim           #+#    #+#             */
-/*   Updated: 2022/08/08 17:43:33 by hyunjcho         ###   ########.fr       */
+/*   Updated: 2022/08/08 17:55:16 by heehkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@
 # define PRESS_KEY	2
 # define MOUSE_EXIT	17
 
-# define SCREEN_X	640
-# define SCREEN_Y	480
+# define SCREEN_X	1280
+# define SCREEN_Y	960
 
 # define TEX_WIDTH	64
 # define TEX_HEIGHT	64
