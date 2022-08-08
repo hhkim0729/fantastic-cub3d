@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: heehkim <heehkim@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: hyunjcho <hyunjcho@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 17:55:54 by heehkim           #+#    #+#             */
-/*   Updated: 2022/08/06 22:27:19 by heehkim          ###   ########.fr       */
+/*   Updated: 2022/08/08 17:45:40 by hyunjcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	draw_line(t_info *info, int x, t_args *args)
 		args->tex_pos += args->step;
 		tex = find_tex_num(args);
 		info->img->data[draw_start * SCREEN_X + x] \
-			= info->map->texture[tex][TEX_HEIGHT * args->tex_y + args->tex_x];
+			= info->map->texture[tex][TEX_WIDTH * args->tex_y + args->tex_x];
 		draw_start++;
 	}
 }
@@ -84,12 +84,12 @@ static void	draw_minimap(t_info *info)
 		while (y < info->map->width)
 		{
 			if (ft_strchr(" 1", info->map->map[x][y]))
-				color = 0x000000;
+				color = COLOR_WALL;
 			else if (y == (int)info->player->pos.x \
 					&& x == (int)info->player->pos.y)
-				color = 0xff0000;
+				color = COLOR_PLAYER;
 			else
-				color = 0xffffff;
+				color = COLOR_EMPTY;
 			draw_square(info->img, x, y, color);
 			y++;
 		}
@@ -108,7 +108,7 @@ int	draw_screen(t_info *info)
 	{
 		set_args(info, &args, x);
 		find_wall_hit(info, &args);
-		if (args.side == 0)
+		if (args.side == HIT_X)
 			args.perp_wall = (args.map_x - info->player->pos.x \
 				+ (1 - args.step_x) / 2) / args.ray_x;
 		else

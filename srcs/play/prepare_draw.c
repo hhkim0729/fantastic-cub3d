@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prepare_draw.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: heehkim <heehkim@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: hyunjcho <hyunjcho@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 17:55:49 by heehkim           #+#    #+#             */
-/*   Updated: 2022/08/05 17:55:49 by heehkim          ###   ########.fr       */
+/*   Updated: 2022/08/08 16:25:12 by hyunjcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,13 @@ void	find_wall_hit(t_info *info, t_args *args)
 		{
 			args->side_x += args->delta_x;
 			args->map_x += args->step_x;
-			args->side = 0;
+			args->side = HIT_X;
 		}
 		else
 		{
 			args->side_y += args->delta_y;
 			args->map_y += args->step_y;
-			args->side = 1;
+			args->side = HIT_Y;
 		}
 		if (info->map->map[args->map_y][args->map_x] == '1')
 			args->hit = 1;
@@ -65,7 +65,7 @@ void	find_wall_hit(t_info *info, t_args *args)
 
 int	find_tex_num(t_args *args)
 {
-	if (args->side == 0)
+	if (args->side == HIT_X)
 	{
 		if (args->ray_x < 0)
 			return (EAST);
@@ -93,15 +93,15 @@ void	set_args_line(t_info *info, t_args *args, \
 	*draw_end = line_height / 2 + SCREEN_Y / 2;
 	if (*draw_end >= SCREEN_Y)
 		*draw_end = SCREEN_Y - 1;
-	if (args->side == 0)
+	if (args->side == HIT_X)
 		args->wall_x = info->player->pos.y + args->perp_wall * args->ray_y;
 	else
 		args->wall_x = info->player->pos.x + args->perp_wall * args->ray_x;
 	args->wall_x -= floor(args->wall_x);
 	args->tex_x = (int)(args->wall_x * (double)TEX_WIDTH);
-	if (args->side == 0 && args->ray_x > 0)
+	if (args->side == HIT_X && args->ray_x > 0)
 		args->tex_x = TEX_WIDTH - args->tex_x - 1;
-	if (args->side == 1 && args->ray_y < 0)
+	if (args->side == HIT_Y && args->ray_y < 0)
 		args->tex_x = TEX_WIDTH - args->tex_x - 1;
 	args->step = 1.0 * TEX_HEIGHT / line_height;
 	args->tex_pos = (*draw_start - SCREEN_Y / 2 + line_height / 2) * args->step;

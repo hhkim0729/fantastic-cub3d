@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: heehkim <heehkim@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: hyunjcho <hyunjcho@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 22:30:51 by heehkim           #+#    #+#             */
-/*   Updated: 2022/08/06 22:30:52 by heehkim          ###   ########.fr       */
+/*   Updated: 2022/08/08 17:43:33 by hyunjcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,32 @@
 # define KEY_LEFT	123
 # define KEY_RIGHT	124
 # define KEY_ESC	53
+
 # define PRESS_KEY	2
 # define MOUSE_EXIT	17
+
 # define SCREEN_X	640
 # define SCREEN_Y	480
+
 # define TEX_WIDTH	64
 # define TEX_HEIGHT	64
-# define NORTH		0
-# define SOUTH		1
-# define EAST		2
-# define WEST		3
+
+# define NORTH	0
+# define SOUTH	1
+# define EAST	2
+# define WEST	3
+
 # define MOVE_SPEED	0.213
 # define ROT_SPEED	0.05
-# define TRUE		1
-# define FALSE		0
+
+# define HIT_X	0
+# define HIT_Y	1
+
+# define COLOR_WALL		0xcdc2ae
+# define COLOR_PLAYER	0xf47c7c
+# define COLOR_EMPTY	0xfbecbb
+
+# define TRUE	1
+# define FALSE	0
 
 #endif

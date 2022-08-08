@@ -6,7 +6,7 @@
 /*   By: hyunjcho <hyunjcho@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 22:31:48 by heehkim           #+#    #+#             */
-/*   Updated: 2022/08/07 18:37:42 by hyunjcho         ###   ########.fr       */
+/*   Updated: 2022/08/08 17:46:58 by hyunjcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct s_player
 
 typedef struct s_map
 {
-	int		info;
+	int		has_info;
 	int		width;
 	int		height;
 	int		floor;

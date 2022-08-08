@@ -6,7 +6,7 @@
 /*   By: hyunjcho <hyunjcho@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 17:55:09 by heehkim           #+#    #+#             */
-/*   Updated: 2022/08/07 18:40:18 by hyunjcho         ###   ########.fr       */
+/*   Updated: 2022/08/08 17:47:12 by hyunjcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	init_map(t_map *map)
 {
-	map->info = FALSE;
+	map->has_info = FALSE;
 	map->width = 0;
 	map->height = 0;
 	map->floor = -1;

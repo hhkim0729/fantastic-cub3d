@@ -6,7 +6,7 @@
 /*   By: hyunjcho <hyunjcho@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 17:54:55 by heehkim           #+#    #+#             */
-/*   Updated: 2022/08/07 18:43:47 by hyunjcho         ###   ########.fr       */
+/*   Updated: 2022/08/08 17:45:46 by hyunjcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ static void	check_mapfile(t_map *map, char *line)
 		check_color(map, line);
 	else if (ft_strchr(" 01NSWE", line[0]))
 	{
-		if (map->info == FALSE)
+		if (map->has_info == FALSE)
 		{
 			check_info(map);
-			map->info = TRUE;
+			map->has_info = TRUE;
 		}
 		check_valid_word(map, line);
 	}
@@ -65,22 +65,7 @@ static void	read_mapfile(t_map *map, char *path)
 	close(fd);
 }
 
-// 나중에 삭제!
-void	print_info(t_info *info)
-{
-	printf("========= map =========\n");
-	for (int i = 0; i < info->map->height; i++)
-		printf("|%s|\n", info->map->map[i]);
-	printf("======== player ======= \n");
-	printf("strart_dir: %c\n", info->map->start_dir);
-	printf("pos_x: %f, pos_y: %f\n", info->player->pos.x, info->player->pos.y);
-	printf("dir_x: %f, dir_y: %f\n", info->player->dir.x, info->player->dir.y);
-	printf("plane_x: %f, plane_y: %f\n", info->player->plane.x, info->player->plane.y);
-	for (int j = 0; j < 4; j++)
-		printf("tex[%d]: %s\n", j, info->map->tex_files[j]);
-}
-
-int	force_quit(void)
+static int	force_quit(void)
 {
 	exit(EXIT_SUCCESS);
 	return (0);
@@ -97,7 +82,6 @@ int	main(int ac, char **av)
 	init_player(info.player, info.map->start_dir);
 	make_map(&info, av[1]);
 	init_texture(&info);
-	print_info(&info);
 	mlx_loop_hook(info.mlx, draw_screen, &info);
 	mlx_hook(info.window, PRESS_KEY, 0, play, &info);
 	mlx_hook(info.window, MOUSE_EXIT, 0, force_quit, &info);
