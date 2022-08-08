@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: heehkim <heehkim@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: hyunjcho <hyunjcho@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 22:31:48 by heehkim           #+#    #+#             */
-/*   Updated: 2022/08/06 22:31:48 by heehkim          ###   ########.fr       */
+/*   Updated: 2022/08/07 18:37:42 by hyunjcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_player
 
 typedef struct s_map
 {
+	int		info;
 	int		width;
 	int		height;
 	int		floor;

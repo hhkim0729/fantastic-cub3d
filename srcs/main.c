@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: heehkim <heehkim@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: hyunjcho <hyunjcho@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 17:54:55 by heehkim           #+#    #+#             */
-/*   Updated: 2022/08/07 17:44:48 by heehkim          ###   ########.fr       */
+/*   Updated: 2022/08/07 18:43:47 by hyunjcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,14 @@ static void	check_mapfile(t_map *map, char *line)
 	else if (!ft_strncmp(line, "F ", 2) || !ft_strncmp(line, "C ", 2))
 		check_color(map, line);
 	else if (ft_strchr(" 01NSWE", line[0]))
+	{
+		if (map->info == FALSE)
+		{
+			check_info(map);
+			map->info = TRUE;
+		}
 		check_valid_word(map, line);
+	}
 }
 
 static void	read_mapfile(t_map *map, char *path)
