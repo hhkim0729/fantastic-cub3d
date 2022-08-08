@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyunjcho <hyunjcho@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: heehkim <heehkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 22:31:48 by heehkim           #+#    #+#             */
-/*   Updated: 2022/08/08 17:46:58 by hyunjcho         ###   ########.fr       */
+/*   Updated: 2022/08/08 19:09:54 by heehkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,17 @@ typedef struct s_player
 	t_vector	dir;
 }	t_player;
 
+typedef struct s_img
+{
+	void	*img;
+	char	*data;
+	int		size_l;
+	int		bpp;
+	int		endian;
+	int		img_width;
+	int		img_height;
+}	t_img;
+
 typedef struct s_map
 {
 	int		has_info;
@@ -39,7 +50,7 @@ typedef struct s_map
 	int		end;
 	int		player;
 	char	start_dir;
-	int		**texture;
+	t_img	texture[4];
 }	t_map;
 
 typedef struct s_args
@@ -64,17 +75,6 @@ typedef struct s_args
 	double	step;
 	double	tex_pos;
 }	t_args;
-
-typedef struct s_img
-{
-	void	*img;
-	int		*data;
-	int		size_l;
-	int		bpp;
-	int		endian;
-	int		img_width;
-	int		img_height;
-}	t_img;
 
 typedef struct s_info
 {

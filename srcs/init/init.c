@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyunjcho <hyunjcho@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: heehkim <heehkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 17:55:09 by heehkim           #+#    #+#             */
-/*   Updated: 2022/08/08 17:47:12 by hyunjcho         ###   ########.fr       */
+/*   Updated: 2022/08/08 19:27:29 by heehkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ void	init_info(t_info *info)
 	info->img->img = mlx_new_image(info->mlx, SCREEN_X, SCREEN_Y);
 	if (!info->img->img)
 		exit_error("Failed to create mlx image");
-	info->img->data = (int *)mlx_get_data_addr(info->img->img, &info->img->bpp, \
-		&info->img->size_l, &info->img->endian);
+	info->img->data = (char *)mlx_get_data_addr(info->img->img, \
+		&info->img->bpp, &info->img->size_l, &info->img->endian);
 	if (!info->img->data)
 		exit_error("Failed to create mlx image data");
 }
@@ -80,32 +80,16 @@ void	init_player(t_player *player, char dir)
 	}
 }
 
-static void	load_image(t_info *info, int *texture, char *path)
+static void	load_image(t_info *info, t_img *texture, char *path)
 {
-	int		x;
-	int		y;
-	t_img	img;
-
-	img.img = mlx_xpm_file_to_image(info->mlx, path, &img.img_width, \
-		&img.img_height);
-	if (!img.img)
+	texture->img = mlx_xpm_file_to_image(info->mlx, path, \
+		&texture->img_width, &texture->img_height);
+	if (!texture->img)
 		exit_error("Failed to load image");
-	img.data = (int *)mlx_get_data_addr(img.img, &img.bpp, &img.size_l, \
-		&img.endian);
-	if (!img.data)
+	texture->data = (char *)mlx_get_data_addr(texture->img, &texture->bpp, \
+		&texture->size_l, &texture->endian);
+	if (!texture->data)
 		exit_error("Failed to create mlx image data");
-	y = 0;
-	while (y < img.img_height)
-	{
-		x = 0;
-		while (x < img.img_width)
-		{
-			texture[img.img_width * y + x] = img.data[img.img_width * y + x];
-			x++;
-		}
-		y++;
-	}
-	mlx_destroy_image(info->mlx, img.img);
 }
 
 void	init_texture(t_info *info)
@@ -114,16 +98,10 @@ void	init_texture(t_info *info)
 	int		i;
 
 	map = info->map;
-	map->texture = (int **)ft_calloc(4, sizeof(int *));
-	if (!map->texture)
-		exit_error("Failed to allocate memory");
 	i = 0;
 	while (i < 4)
 	{
-		map->texture[i] = (int *)ft_calloc(TEX_WIDTH * TEX_HEIGHT, sizeof(int));
-		if (!map->texture[i])
-			exit_error("Failed to allocate memory");
-		load_image(info, map->texture[i], map->tex_files[i]);
+		load_image(info, &(map->texture[i]), map->tex_files[i]);
 		i++;
 	}
 }

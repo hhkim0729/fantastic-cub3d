@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyunjcho <hyunjcho@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: heehkim <heehkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 17:55:54 by heehkim           #+#    #+#             */
-/*   Updated: 2022/08/08 17:45:40 by hyunjcho         ###   ########.fr       */
+/*   Updated: 2022/08/08 19:31:10 by heehkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,25 @@
 
 static void	draw_floor_ceiling(t_info *info)
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
+	t_img	*img;
+	int		byte;
 
 	x = 0;
+	img = info->img;
+	byte = img->bpp / 8;
 	while (x < SCREEN_X)
 	{
 		y = 0;
 		while (y < SCREEN_Y)
 		{
 			if (y < SCREEN_Y / 2)
-				info->img->data[y * SCREEN_X + x] = info->map->ceil;
+				*(unsigned int *)(img->data + y * img->size_l + x * byte) \
+					= info->map->ceil;
 			else
-				info->img->data[y * SCREEN_X + x] = info->map->floor;
+				*(unsigned int *)(img->data + y * img->size_l + x * byte) \
+					= info->map->floor;
 			y++;
 		}
 		x++;
@@ -35,19 +41,24 @@ static void	draw_floor_ceiling(t_info *info)
 
 static void	draw_line(t_info *info, int x, t_args *args)
 {
-	int	draw_start;
-	int	draw_end;
-	int	tex;
+	int		start;
+	int		end;
+	int		tex_i;
+	t_img	*dst;
+	t_img	*src;
 
-	set_args_line(info, args, &draw_start, &draw_end);
-	while (draw_start < draw_end)
+	set_args_line(info, args, &start, &end);
+	tex_i = find_tex_num(args);
+	dst = info->img;
+	src = &(info->map->texture[tex_i]);
+	while (start < end)
 	{
 		args->tex_y = (int)args->tex_pos & (TEX_HEIGHT - 1);
 		args->tex_pos += args->step;
-		tex = find_tex_num(args);
-		info->img->data[draw_start * SCREEN_X + x] \
-			= info->map->texture[tex][TEX_WIDTH * args->tex_y + args->tex_x];
-		draw_start++;
+		*(unsigned int *)(dst->data + start * dst->size_l + x * dst->bpp / 8) \
+			= *(unsigned int *)(src->data + args->tex_y * src->size_l \
+				+ args->tex_x * src->bpp / 8);
+		start++;
 	}
 }
 
@@ -64,7 +75,8 @@ static void	draw_square(t_img *img, int x, int y, int color)
 		i = 0;
 		while (i < size)
 		{
-			img->data[SCREEN_X * (size * x + j) + (size * y) + i] = color;
+			*(unsigned int *)(img->data + (size * x + j) * img->size_l \
+				+ (size * y + i) * (img->bpp / 8)) = color;
 			i++;
 		}
 		j++;
