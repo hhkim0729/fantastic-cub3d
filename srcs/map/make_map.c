@@ -6,19 +6,16 @@
 /*   By: heehkim <heehkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 17:55:46 by heehkim           #+#    #+#             */
-/*   Updated: 2022/08/05 18:16:28 by heehkim          ###   ########.fr       */
+/*   Updated: 2022/08/09 23:56:28 by heehkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map.h"
 
-static void	set_player_pos(t_info *info, char c, int i, int j)
+static void	set_player_pos(t_info *info, int i, int j)
 {
-	if (c == info->map->start_dir)
-	{
-		info->player->pos.x = j + 0.5;
-		info->player->pos.y = i + 0.5;
-	}
+	info->player->pos.x = j + 0.5;
+	info->player->pos.y = i + 0.5;
 }
 
 static void	fill_map(t_info *info, char *line, int fd)
@@ -35,11 +32,9 @@ static void	fill_map(t_info *info, char *line, int fd)
 		j = 0;
 		while (line[j] && line[j] != '\n')
 		{
-			if (ft_isspace(line[j]))
-				info->map->map[i][j] = ' ';
-			else
-				info->map->map[i][j] = line[j];
-			set_player_pos(info, line[j], i, j);
+			info->map->map[i][j] = line[j];
+			if (line[j] == info->map->start_dir)
+				set_player_pos(info, i, j);
 			j++;
 		}
 		while (j < info->map->width - 1)

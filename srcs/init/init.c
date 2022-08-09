@@ -6,7 +6,7 @@
 /*   By: heehkim <heehkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 17:55:09 by heehkim           #+#    #+#             */
-/*   Updated: 2022/08/08 19:27:29 by heehkim          ###   ########.fr       */
+/*   Updated: 2022/08/09 23:32:24 by heehkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,16 @@
 
 static void	init_map(t_map *map)
 {
-	map->has_info = FALSE;
-	map->width = 0;
-	map->height = 0;
 	map->floor = -1;
 	map->ceil = -1;
-	map->map = NULL;
 	map->tex_files = (char **)ft_calloc(4, sizeof(char *));
 	if (!map->tex_files)
 		exit_error("Failed to allocate memory");
-	map->start = 0;
-	map->end = 0;
-	map->player = 0;
 }
 
 void	init_info(t_info *info)
 {
-	info->map = (t_map *)malloc(sizeof(t_map));
+	info->map = (t_map *)ft_calloc(1, sizeof(t_map));
 	if (!info->map)
 		exit_error("Failed to allocate memory");
 	init_map(info->map);

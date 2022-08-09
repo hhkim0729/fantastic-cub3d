@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyunjcho <hyunjcho@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: heehkim <heehkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 17:55:27 by heehkim           #+#    #+#             */
-/*   Updated: 2022/08/07 18:40:17 by hyunjcho         ###   ########.fr       */
+/*   Updated: 2022/08/09 23:30:34 by heehkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ void	check_valid_word(t_map *map, char *line)
 	int	i;
 
 	i = 0;
-	while (line[i] && (ft_isspace(line[i]) || line[i] == '0' || line[i] == '1' \
-		|| ft_strchr("NSWE", line[i])))
+	while (line[i] && ft_strchr(" 01NSWE", line[i]))
 	{
 		if (ft_strchr("NSWE", line[i]))
 		{
