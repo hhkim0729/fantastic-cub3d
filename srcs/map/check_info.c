@@ -6,16 +6,24 @@
 /*   By: heehkim <heehkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 17:55:29 by heehkim           #+#    #+#             */
-/*   Updated: 2022/08/05 18:19:03 by heehkim          ###   ########.fr       */
+/*   Updated: 2022/08/10 15:20:07 by heehkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map.h"
 
+static void	set_tex_file(t_map *map, int dir, char *path)
+{
+	if (map->tex_files[dir])
+		exit_error("Only one texture is valid");
+	map->tex_files[dir] = path;
+}
+
 void	check_texture(t_map *map, char *line, char c)
 {
 	int		i;
 	char	*tmp;
+	int		dir;
 
 	i = 3;
 	while (ft_isspace(line[i]))
@@ -24,13 +32,14 @@ void	check_texture(t_map *map, char *line, char c)
 	if (!tmp)
 		exit_error("Failed to allocate memory");
 	if (c == 'N')
-		map->tex_files[NORTH] = tmp;
+		dir = NORTH;
 	else if (c == 'S')
-		map->tex_files[SOUTH] = tmp;
+		dir = SOUTH;
 	else if (c == 'E')
-		map->tex_files[EAST] = tmp;
+		dir = EAST;
 	else
-		map->tex_files[WEST] = tmp;
+		dir = WEST;
+	set_tex_file(map, dir, tmp);
 }
 
 static void	to_rgb(t_map *map, int *color, char c)

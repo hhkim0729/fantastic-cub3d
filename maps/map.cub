@@ -1,7 +1,7 @@
-NO ./textures/colorstone.xpm
-SO ./textures/greystone.xpm
-WE ./textures/redbrick.xpm
-EA ./textures/wood.xpm
+NO ./textures/blue.xpm
+SO ./textures/green.xpm
+WE ./textures/cream.xpm
+EA ./textures/grey.xpm
 
 F 213, 196, 229
 C 251, 236, 187
